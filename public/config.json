@@ -33,7 +33,7 @@
     },     
     {
       "id": "zwRg58gN",
-      "title": "Lake",
+      "title": "A Swiss Lake",
       "category": "Nature",
       "videoSource": "https://pixabay.com/videos/river-mountains-bridge-nature-14205/",
       "videoLink": "media/lake.mp4",
@@ -53,7 +53,7 @@
     },    
     {
       "id": "sRlrRUYo",
-      "title": "Tropical Beach",
+      "title": "Tropical Beach From Above",
       "category": "Nature",
       "videoSource": "https://pixabay.com/videos/beach-ocean-wave-sea-coast-water-42179/",
       "videoLink": "media/tropical_beach.mp4",
@@ -62,15 +62,55 @@
       "audioLink": "media/ocean_waves.mp3"
     },      
     {
+      "id": "umTyLFTF",
+      "title": "Danish North Sea Island Sunset",
+      "category": "Nature",
+      "videoSource": "",
+      "videoLink": "media/north_sea_island_sunset_1.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },
+    {
+      "id": "irCNjtD5",
+      "title": "Danish North Sea Island Sunset",
+      "category": "Nature",
+      "videoSource": "",
+      "videoLink": "media/north_sea_island_sunset_2.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },
+    {
+      "id": "8BBBTR0M",
+      "title": "Danish North Sea Island Sunset",
+      "category": "Nature",
+      "videoSource": "",
+      "videoLink": "media/north_sea_island_sunset_3.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },
+    {
+      "id": "ASZiUFEy",
+      "title": "Danish North Sea Windy Beach",
+      "category": "Nature",
+      "videoSource": "",
+      "videoLink": "media/north_sea_windy_beach.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },
+    {
       "id": "M0xGvD2W",
-      "title": "Sunset Beach",
+      "title": "Sunset Beach with Waves",
       "category": "Nature",
       "videoSource": "https://pixabay.com/videos/sea-wave-golden-sand-sunrise-4006/",
       "videoLink": "media/sea.mp4",
       "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
       "audioTitle": "Ocean Waves by Noted451 (unchanged)",
       "audioLink": "media/ocean_waves.mp3"
-    },      
+    },                   
     {
       "id": "6incLFsq",
       "title": "Lake Michigan",
@@ -172,7 +212,7 @@
     },     
     {
       "id": "25PPO2u7",
-      "title": "Misty Mountains",
+      "title": "Misty Blue Mountains",
       "category": "Nature",
       "videoSource": "https://pixabay.com/videos/mountains-clouds-4k-nature-cold-31175/",
       "videoLink": "media/mountains.mp4",

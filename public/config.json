@@ -1,0 +1,255 @@
+{
+  "baseUrl": "https://storage.googleapis.com/calmw/",
+  "scenes": [
+    {
+      "id": "y2gai9Eq",
+      "title": "Campfire",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/campfire-camp-camping-outdoor-31466/",
+      "videoLink": "media/campfire.mp4",
+      "audioSource": "https://freesound.org/people/sagetyrtle/sounds/62487/",
+      "audioTitle": "1103campfire1 by sagetyrtle",
+      "audioLink": "media/campfire.mp3"
+    }, 
+    {
+      "id": "9zErzKlk",
+      "title": "Fireplace",
+      "category": "Home",
+      "videoSource": "https://pixabay.com/videos/fireplace-fire-hut-window-outlook-31313/",
+      "videoLink": "media/fireplace.mp4",
+      "audioSource": "https://freesound.org/people/martats/sounds/138018/",
+      "audioTitle": "1103campfire1 by sagetyrtle",
+      "audioLink": "media/fireplace.mp3"
+    }, 
+    {
+      "id": "hvCBfXpj",
+      "title": "Baking Pastry Bread",
+      "category": "Home",
+      "videoSource": "https://www.pexels.com/video/baking-pastry-bread-857167/",
+      "videoLink": "media/baking_pastry.mp4",
+      "audioSource": "https://freesound.org/people/gruenebanane/sounds/241813/",
+      "audioTitle": "Teig ausrollen by gruenebanane (unchanged)",
+      "audioLink": "media/dough.mp3"
+    },     
+    {
+      "id": "zwRg58gN",
+      "title": "Lake",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/river-mountains-bridge-nature-14205/",
+      "videoLink": "media/lake.mp4",
+      "audioSource": "https://freesound.org/people/Benboncan/sounds/67884/",
+      "audioTitle": "Lake Waves 2 by Benboncan (unchanged)",
+      "audioLink": "media/lake.mp3"
+    },       
+    {
+      "id": "9XpphdOX",
+      "title": "Ocean",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/waves-water-sea-ocean-landscape-22183/",
+      "videoLink": "media/ocean.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },    
+    {
+      "id": "sRlrRUYo",
+      "title": "Tropical Beach",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/beach-ocean-wave-sea-coast-water-42179/",
+      "videoLink": "media/tropical_beach.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },      
+    {
+      "id": "M0xGvD2W",
+      "title": "Sunset Beach",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/sea-wave-golden-sand-sunrise-4006/",
+      "videoLink": "media/sea.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },      
+    {
+      "id": "6incLFsq",
+      "title": "Lake Michigan",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/lake-michigan-leland-waves-windy-36364/",
+      "videoLink": "media/ocean_waves2.mp4",
+      "audioSource": "https://freesound.org/people/Noted451/sounds/531015/",
+      "audioTitle": "Ocean Waves by Noted451 (unchanged)",
+      "audioLink": "media/ocean_waves.mp3"
+    },        
+    {
+      "id": "WanSl0Iq",
+      "title": "City Day",
+      "category": "Cities",
+      "videoSource": "https://pixabay.com/videos/metropole-morning-city-mist-2337/",
+      "videoLink": "media/city_day.mp4",
+      "audioSource": "https://freesound.org/people/inchadney/sounds/39496/",
+      "audioTitle": "City Traffic 2 by inchadney (unchanged)",
+      "audioLink": "media/city_traffic.mp3"
+    },     
+    {
+      "id": "zj9bEbPI",
+      "title": "City Night",
+      "category": "Cities",
+      "videoSource": "https://pixabay.com/videos/city-night-lights-urban-cityscape-3134/",
+      "videoLink": "media/city_night.mp4",
+      "audioSource": "https://freesound.org/people/inchadney/sounds/39496/",
+      "audioTitle": "City Traffic 2 by inchadney (unchanged)",
+      "audioLink": "media/city_traffic.mp3"
+    },       
+    {
+      "id": "bqODMAA2",
+      "title": "Rainy Garden",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/rain-weather-nature-water-plant-44143/",
+      "videoLink": "media/rainy_garden.mp4",
+      "audioSource": "https://freesound.org/people/KaiLietzke/sounds/185062/",
+      "audioTitle": "rainy by KaiLietzke (unchanged)",
+      "audioLink": "media/rain.mp3"
+    },          
+    {
+      "id": "3cjmSRC1",
+      "title": "Rainy Trees",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/forest-rain-fog-trees-nature-31450/",
+      "videoLink": "media/rainy_trees.mp4",
+      "audioSource": "https://freesound.org/people/KaiLietzke/sounds/185062/",
+      "audioTitle": "rainy by KaiLietzke (unchanged)",
+      "audioLink": "media/rain.mp3"
+    },   
+    {
+      "id": "6fszZBEi",
+      "title": "Rainy Forest",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/forest-rain-nature-fog-clouds-42129/",
+      "videoLink": "media/rainy_forest.mp4",
+      "audioSource": "https://freesound.org/people/KaiLietzke/sounds/185062/",
+      "audioTitle": "rainy by KaiLietzke (unchanged)",
+      "audioLink": "media/rain.mp3"
+    },          
+    {
+      "id": "K6dXZTwd",
+      "title": "Winter Trees",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/snowfall-winter-snow-cold-29314/",
+      "videoLink": "media/snowfall-on-trees.mp4",
+      "audioSource": "https://freesound.org/people/haraldthi/sounds/418246/",
+      "audioLink": "media/snow.mp3"
+    },      
+    {
+      "id": "MKJgvVT0",
+      "title": "Fall Trees",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/fall-autumn-season-nature-leaves-23881/",
+      "videoLink": "media/fall-trees.mp4",
+      "audioSource": "https://freesound.org/people/klangfabrik/sounds/159606/",
+      "audioTitle": "windinleaves by klangfabrik (unchanged)",
+      "audioLink": "media/wind-in-leaves.mp3"
+    },  
+    {
+      "id": "IaOZBkaO",
+      "title": "Grass",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/grass-fence-wind-windy-stormy-988/",
+      "videoLink": "media/grass.mp4",
+      "audioSource": "https://freesound.org/people/klangfabrik/sounds/159606/",
+      "audioTitle": "windinleaves by klangfabrik (unchanged)",
+      "audioLink": "media/wind-in-leaves.mp3"
+    },     
+    {
+      "id": "GRWEqqfz",
+      "title": "Fall Street",
+      "category": "Cities",
+      "videoSource": "https://pixabay.com/videos/sidewalk-autumn-fall-wind-287/",
+      "videoLink": "media/fall_street.mp4",
+      "audioSource": "https://freesound.org/people/klangfabrik/sounds/159606/",
+      "audioTitle": "windinleaves by klangfabrik (unchanged)",
+      "audioLink": "media/wind2.mp3"
+    },     
+    {
+      "id": "25PPO2u7",
+      "title": "Misty Mountains",
+      "category": "Nature",
+      "videoSource": "https://pixabay.com/videos/mountains-clouds-4k-nature-cold-31175/",
+      "videoLink": "media/mountains.mp4",
+      "audioSource": "http://soundbible.com/1810-Wind.html",
+      "audioTitle": "Wind Sound by Mark DiAngelo (unchanged)",
+      "audioLink": "media/wind.mp3"
+    },        
+    {
+      "id": "crRdKRWd",
+      "title": "Forest River",
+      "category": "Nature",
+      "tags": ["forest", "river", "water", "creek"],
+      "videoSource": "",
+      "videoLink": "media/waterfall_trees_stonewall.mp4",
+      "audioSource": "",
+      "audioLink": "media/stream_bubbling.mp3"
+    },
+    {
+      "id": "tx67x8Ny",
+      "title": "Hot Coffee on a Table",
+      "category": "Cities",
+      "tags": ["cafe", "coffee", "city"],
+      "videoSource": "https://pixabay.com/videos/cup-of-coffee-hot-beverage-morning-3595/",
+      "videoLink": "media/coffee_steam_table.mp4",
+      "audioSource": "https://www.salamisound.de/7007726-party-cafe-buffet-bar",
+      "audioTitle": "Party Cafe Buffet Bar Restaurant... (unchanged)",
+      "audioLink": "media/cafe_sounds.mp3"
+    },
+    {
+      "id": "Tpk9nlgY",
+      "title": "People in a Restaurant",
+      "category": "Cities",
+      "videoSource": "https://pixabay.com/videos/bar-counter-restaurant-bar-people-2328/",
+      "videoLink": "media/restaurant.mp4",
+      "audioSource": "https://www.salamisound.de/7007726-party-cafe-buffet-bar",
+      "audioTitle": "Party Cafe Buffet Bar Restaurant.. (unchanged).",
+      "audioLink": "media/cafe_sounds.mp3"
+    },
+    {
+      "id": "iOE7JxcO",
+      "title": "Grazing Horses",
+      "category": "Animals",
+      "videoSource": "https://www.youtube.com/watch?v=lz4xtlQk9Hc",
+      "videoLink": "media/horses.mp4",
+      "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
+      "audioTitle": "Summer Open Field Dusk (unchanged)",
+      "audioLink": "media/field.mp3"
+    },
+    {
+      "id": "XXNetQ7I",
+      "title": "Black Cat In The Grass",
+      "category": "Animals",
+      "videoSource": "https://www.videezy.com/animals-and-wildlife/2165-black-cat-in-the-grass-stock-video",
+      "videoLink": "media/black_cat.mp4",
+      "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
+      "audioTitle": "Summer Open Field Dusk (unchanged)",
+      "audioLink": "media/field.mp3"
+    },    
+    {
+      "id": "6qs8NKW3",
+      "title": "Sheep Grazing in a Field",
+      "category": "Animals",
+      "videoSource": "https://www.videvo.net/video/sheep-grazing-in-a-field-/1782/",
+      "videoLink": "media/sheep.mp4",
+      "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
+      "audioTitle": "Summer Open Field Dusk (unchanged)",
+      "audioLink": "media/field.mp3"
+    },
+    {
+      "id": "SEoqdHwz",
+      "title": "Sheep Grazing in New Zealand Meadow",
+      "category": "Animals",
+      "videoSource": "https://www.videvo.net/video/sheep-grazing-in-new-zealand-meadow/5945/",
+      "videoLink": "media/sheep2.mp4",
+      "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
+      "audioTitle": "Summer Open Field Dusk (unchanged)",
+      "audioLink": "media/field.mp3"
+    }
+  ]
+}

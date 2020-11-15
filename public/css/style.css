@@ -1,0 +1,280 @@
+body {
+  font-family: 'Quicksand', cursive;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  margin: 0px;   
+  overflow-x: hidden;     
+}
+
+.header {
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  left: 5px;
+  top: 5px;
+  color: white;
+  opacity: 0;
+  font-size: 5vw;
+  font-family: "arial";
+}
+
+.video {
+  width: auto; 
+  height: 100%; 
+  position: fixed; 
+  left: 0px; 
+  top: 0px;
+  object-fit: fill;
+  z-index: -1;
+}
+
+.video-frame {
+  bottom: 5px;
+  right: 0px;
+  top: auto;
+  height: 8%;
+  text-align: center;
+  opacity: .5;
+}
+
+#bright-frame {
+  width: 100%; 
+  height: 100%; 
+  position: fixed; 
+  background-color: black;
+  opacity: 0;
+  left: 0px; 
+  top: 0px;   
+  pointer-events: none;     
+}
+
+.info-frame {
+  position: fixed;
+  top: 5px;
+  right: 0px;
+  text-align: right;
+  opacity: .5;
+}   
+
+#menu-popup {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  background-color: black;
+  opacity: .9;
+  overflow-y: auto;
+}  
+
+#help-popup {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  background-color: black;
+  opacity: .9;
+  overflow-y: auto;
+}  
+
+#info-popup {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  background-color: black;
+  font-family: 'Quicksand', cursive;
+  opacity: .8;
+  overflow-y: auto;
+  z-index: 100;
+}           
+
+.info-box {
+  background-color: white;
+  width: 80vw;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+  color: #666666;
+  border-radius: 40px;
+  font-size: 17px;
+  opacity: 1;
+  border: 5px solid #00F0FF;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+  padding-bottom: 20px;
+}
+
+@media only screen 
+and (min-width : 321px) {
+  #infoList {
+    max-height: 70%;
+    overflow-y: auto;   
+  }
+}
+
+.listentry {
+  color: #666666;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 30px;
+  text-align: left;
+  width: 200px;
+  margin: auto;
+}
+
+.category-name {
+  position: relative;
+  bottom: 11px;
+  left: 10px;
+}
+
+@media only screen 
+and (max-height : 460px) {
+  #logo-div {
+    display: none;
+  }
+}
+
+#logo-span {
+  position: relative;
+  top: -15px;
+  font-family: 'Quicksand', cursive;
+  font-size: 38px;    
+}
+
+#logo-pic {
+  margin: 7px;
+}
+
+.video-button {
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  background-size: cover;
+  border: none;        
+  margin: 3px;
+}
+
+#play-div {
+  position: relative;
+  top: -30px;
+}
+
+.credits-box {
+  font-weight: bold;
+}
+
+#credits-icon {
+  bottom: 65px;
+  font-size: 12px;
+}
+
+.video-button-play {
+  background-image: url("../icons/play2.png");
+}
+.video-button-pause {
+  background-image: url("../icons/pause2.png");
+}      
+.video-button-fullscreen {
+  background-image: url("../icons/fullscreen2.png");
+}
+.video-button-exitfullscreen {
+  background-image: url("../icons/exit-fullscreen.png");
+}      
+.video-button-random {
+  background-image: url("../icons/next.png");
+}
+.video-button-brightness {
+  background-image: url("../icons/sun.png");
+}      
+.video-button-info {
+  background-image: url("../icons/info.png");
+}      
+.video-button-info {
+  background-image: url("../icons/info.png");
+}
+.video-button-menu {
+  background-image: url("../icons/leaf.png");
+}      
+*:focus {
+  outline: none;
+}
+
+/* unvisited link */
+a:link {
+  color: 666666;
+}
+
+/* visited link */
+a:visited {
+  color: 666666;
+}
+
+/* mouse over link */
+a:hover {
+  color: 666666;
+}
+
+/* selected link */
+a:active {
+  color: 666666;
+}     
+
+#play-panel {
+  margin-top: 2px;
+}
+
+#button-panel {
+  position: absolute;
+  width: 100%;
+  background-color: black;  
+}
+
+.button-div {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.button-text {
+  color: white;
+  font-size: 13px;
+}
+
+#title-div {
+  display: none;
+  width: 100%;
+  margin-top: 60;
+  text-align: center;
+  font-family: 'Quicksand', cursive;
+  font-size:  6vh;
+  color: white;
+  background-color: black;
+  opacity: .7;
+}
+
+.title-div-simple {
+  display: none;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  text-align: left !important; 
+  font-family: 'Quicksand', cursive;
+  font-size:  6vw;
+  color: white;
+  background-color: black;
+  opacity: .7;
+  padding-left: 35px;
+  /* font-style: italic; */
+}

@@ -1,5 +1,9 @@
 {
   "baseUrl": "https://storage.googleapis.com/calmw/",
+  "music": {
+    "contemplation": 23,
+    "happy": 11
+  },
   "scenes": [
     {
       "id": "y2gai9Eq",
@@ -215,7 +219,7 @@
       "title": "Misty Blue Mountains",
       "category": "Nature",
       "videoSource": "https://pixabay.com/videos/mountains-clouds-4k-nature-cold-31175/",
-      "videoLink": "media/mountains.mp4",
+      "videoLink": "media/mountains1.mp4",
       "audioSource": "http://soundbible.com/1810-Wind.html",
       "audioTitle": "Wind Sound by Mark DiAngelo (unchanged)",
       "audioLink": "media/wind.mp3"
@@ -290,6 +294,166 @@
       "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
       "audioTitle": "Summer Open Field Dusk (unchanged)",
       "audioLink": "media/field.mp3"
+    },
+    {
+      "id": "TVBGLmQo",
+      "title": "Manhattan",
+      "category": "Cities, Explore",
+      "videoSource": "https://www.youtube.com/watch?v=p_PQ4VyPDEA&t=16s",
+      "videoLink": "media/manhattan.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "6zbsF1NF",
+      "title": "Travel",
+      "category": "Explore",
+      "videoSource": "Unknown",
+      "videoLink": "media/travel1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "CnzfCI69",
+      "title": "Oceans",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=n6__RLwNtII",
+      "videoLink": "media/oceans1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "jSSeSBbr",
+      "title": "Indonesia",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=EjJUcgggrGo",
+      "videoLink": "media/indonesia1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "Z1MOXOqu",
+      "title": "France",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=dw8wZNFvCK8",
+      "videoLink": "media/france1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "C35GHTW0",
+      "title": "Mountains",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=PJPgU7PJ7LU",
+      "videoLink": "media/mountains2.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "BHKOgTKw",
+      "title": "Forests",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=-sPLXP-YkfY",
+      "videoLink": "media/jungle1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "AE795tqt",
+      "title": "Landscapes",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=9vbnGNLpNqc",
+      "videoLink": "media/drone1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "yC0JPOQj",
+      "title": "Landscapes",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=j-3nl88O7uI",
+      "videoLink": "media/drone2.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "fuBvjYqW",
+      "title": "Landscapes",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=zRpazyH1WzI",
+      "videoLink": "media/drone3.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "TpacXkkP",
+      "title": "Sunrise",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=1oGDGaVEJkA",
+      "videoLink": "media/sunrise.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "emI2ftmK",
+      "title": "Switzerland",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=nHjy0tXdmOQ",
+      "videoLink": "media/switzerland.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "xfXNWcBr",
+      "title": "Timelapse",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=CmCIZ_aUAeQ",
+      "videoLink": "media/timelapse1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "jYrwCEyx",
+      "title": "Timelapse",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=HHBsvKnCkwI",
+      "videoLink": "media/timelapse2.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "BfntYDZJ",
+      "title": "Landscapes",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=cEHP_LeBeyQ",
+      "videoLink": "media/drone4.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "tDhYMPij",
+      "title": "Landscapes",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=-c552FHJbrM",
+      "videoLink": "media/drone5.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
     }
   ]
 }

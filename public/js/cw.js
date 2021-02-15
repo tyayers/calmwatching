@@ -3,40 +3,66 @@ firebase.analytics();
 var config;
 var configById = {};
 var categories = {};
-
+var defaultView = "simple";
 const queryString = window.location.search;
 console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
-var category = urlParams.get("cat");
+var category = "all"; //urlParams.get("cat");
 var id = urlParams.get("id");
-var view = urlParams.get("view");
+var view = localStorage.getItem('view');
+
+var vTimer;
+var aTimer;
+
+if (window.location.pathname != "/")
+  category = window.location.pathname.replace("/", "");
 
 var videoElement = document.getElementById("videoElement");
 var audioElement = document.getElementById("audioElement");
+var asmrAudioElement = document.getElementById("asmrAudioElement");
 var logoSpan = document.getElementById("logo-span");
 var tickerDiv = document.getElementById("ticker-div");
 var titleDiv = document.getElementById("title-div");
+var titleText = document.getElementById("title-text");
 var tickerNews = document.getElementById("ticker-news");
 var playButton = document.getElementById("play-button");
 var fullscreenButton = document.getElementById("fullscreen-button");
 var fullscreenText = document.getElementById("fullscreen-text");
-var menuPopup = document.getElementById("menu-popup");
 var helpPopup= document.getElementById("help-popup");
 var infoPopup = document.getElementById("info-popup");
 var infoButton = document.getElementById("info-button");
 var videoCredit = document.getElementById("credits-video");
 var audioCredit = document.getElementById("credits-audio");
 var brightElement = document.getElementById("bright-frame");
-var categoryList = document.getElementById("categoryList");
+var categoryList = document.getElementById("cat-select");
 var buttonPanel = document.getElementById("button-panel");
 var themeSelect = document.getElementById("theme-select");
 var newsCheckbox = document.getElementById("news-checkbox");
+var muteCheckbox = document.getElementById("mute");
+var asmrMuteCheckbox = document.getElementById("asmrMute");
+
+var audioMute = localStorage.getItem('audioMute') == "true";
+if (audioMute)
+  muteCheckbox.setAttribute("checked", "");
+else
+  muteCheckbox.removeAttribute("checked");
+
+var asmrMute = localStorage.getItem('asmrMute');
+if (asmrMute == undefined || asmrMute == "true") 
+  asmrMute = true;
+else
+  asmrMute = false;
+
+if (asmrMute)
+  asmrMuteCheckbox.setAttribute("checked", "");
+else
+  asmrMuteCheckbox.removeAttribute("checked");
 
 if(view)
   themeSelect.value = view;
 else {
-  view = "simple";
-  themeSelect.value = "simple";
+  view = defaultView;
+  themeSelect.value = defaultView;
 }
 // if (view === "news")
 //   newsCheckbox.checked = true;
@@ -44,6 +70,7 @@ else {
 //   newsCheckbox.checked = false;
 
 audioElement.volume = 0;
+asmrAudioElement.volume = 0;
 
 fetch('config.json')
 .then((res) => {
@@ -55,49 +82,56 @@ fetch('config.json')
 .then((res) => res.json())
 .then((res) => {
   config = res;
-  config.scenes.unshift({
-    category: "All"
-  });
-
   config.scenes.forEach(scene => {
-    configById[scene.id] = scene;
 
     if (scene.category) {
-      if (!categories[scene.category]) {
-        categories[scene.category] = [];
-        var entryElement = document.createElement("div");
-        var spanElement = document.createElement("span");
-        var iconElement = document.createElement("img");
-        
-        iconElement.src = "./icons/" + scene.category.toLowerCase() + ".png";
-        iconElement.width = "40";
-        
-        spanElement.innerHTML = scene.category;
-        spanElement.classList.add("category-name")
+      var cats = scene.category.split(",");
 
-        entryElement.classList.add("listentry");
-        entryElement.setAttribute("data-category", scene.category.toLowerCase());
-        entryElement.append(iconElement);
-        entryElement.append(spanElement);
-        entryElement.addEventListener('click', setCategory);
-        categoryList.appendChild(entryElement);
+      for (i in cats) {
+        cat = cats[i].trim();
+        if (!categories[cat]) {
+          categories[cat] = [];
+          var entryElement = document.createElement("option");
+          entryElement.setAttribute("value", cat.toLowerCase());
+          entryElement.innerHTML = cat;
+
+          if (cat.toLowerCase() == category) entryElement.setAttribute("selected", "");
+
+          categoryList.appendChild(entryElement);
+
+          // iconElement.src = "./icons/" + cat.toLowerCase() + ".png";
+          // iconElement.width = "40";
+          
+          // spanElement.innerHTML = cat;
+          // spanElement.classList.add("category-name")
+
+          // entryElement.classList.add("listentry");
+          // entryElement.setAttribute("data-category", cat.toLowerCase());
+          // entryElement.append(iconElement);
+          // entryElement.append(spanElement);
+          // entryElement.addEventListener('click', setCategory);
+          // categoryList.appendChild(entryElement);
+        }
+
+        var newScene = Object.assign({}, scene);
+        newScene.category = cat;
+        configById[scene.id] = newScene;
+        categories[cat].push(scene);
       }
-
-      categories[scene.category].push(scene);
     }
   });
-
-  toggleInfoPopup();
 
   if (id)
     setVideo(id);
   else
     randomVideo();
 
+  toggleInfoPopup();
+
   if(view == "news") {
     tickerDiv.style.display = "block";
   }
-  else if (view == "simple") {
+  else if (view == "simple" || view == "none") {
     //titleDiv.classList.remove("tit");
     titleDiv.classList.add("title-div-simple");    
     titleDiv.style.display = "block";
@@ -106,10 +140,10 @@ fetch('config.json')
   setTimeout(resizeVideo, 1000);
   setTimeout(resizeVideo, 8000);
 
-  // Change the video every 10 minutes
-  setInterval(() => {
-    randomVideo();
-  }, 600000);
+  // Change the video every 5 minutes
+  // videoSwitchTimer = setInterval(() => {
+  //   randomVideo();
+  // }, 300000);
 })      
 .catch((e) => console.log('Fetch Error:', e))      
 
@@ -137,17 +171,29 @@ window.onpopstate = function (event) {
   setVideo(newId);
 }
 
-function setCategory(e) {
-  var newCategory = e.target.getAttribute("data-category");
-  if (! newCategory) 
-    newCategory = e.target.parentNode.getAttribute("data-category");
+var videoTimer = function() {
+  randomVideo();
+}
 
-  var newUrl = window.location.origin + window.location.pathname;
+var audioTimer = function() {
+  audioElement.src = "media/music/contemplation" + Math.floor(Math.random() * config.music.contemplation) + ".mp3";
+}
+
+function setCategory(e) {
+  var newCategory = e.target.value;
+  // if (! newCategory) 
+  //   newCategory = e.target.parentNode.getAttribute("data-category");
+
+  var newUrl = window.location.origin; // + window.location.pathname;
   if (newCategory.toLowerCase() != "all") {
-    newUrl += "?cat=" + newCategory;
-    if (view != "simple") newUrl += "&view=" + view;
+    //newUrl += "?cat=" + newCategory;
+    newUrl += "/" + newCategory;
+    if (view != defaultView) newUrl += "&view=" + none;
   }
-  else if (view != "simple")
+  // else if (view != defaultView)
+  //   newUrl += "?view=" + view;
+
+  if (view != defaultView)
     newUrl += "?view=" + view;
 
   window.location.href = newUrl;
@@ -158,30 +204,69 @@ function setVideo(newid) {
   var scene = configById[newid];
   id = newid;
   var videoLink = scene.videoLink;
-  var audioLink = scene.audioLink;
+  var audioLink = "";
+  
+  clearTimeout(aTimer);
+  clearTimeout(vTimer);
+
+  if (scene.audioLink) audioLink = scene.audioLink;
+
+  if (!audioLink) {
+    //Load default music
+    audioLink = "media/music/contemplation" + Math.floor(Math.random() * config.music.contemplation) + ".mp3";
+    audioCredit.href = "https://www.bensound.com";
+    audioCredit.textContent = "\"Royalty Free Music by BenSound\"";    
+  }
 
   if (config.baseUrl && window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1") {
     videoLink = config.baseUrl + videoLink;
-    audioLink = config.baseUrl + audioLink;
+    if (audioLink) audioLink = config.baseUrl + audioLink;
   }
 
   videoElement.src = videoLink;
   audioElement.src = audioLink;
-  if (infoPopup.style.display != "none") {
+  //if (infoPopup.style.display != "none") {
+  if (infoPopup.style.opacity != 0) {  
     fadeAudioOut();
     //audioElement.pause();
   }
 
   videoCredit.href = scene.videoSource;
   videoCredit.textContent = "\"" + scene.title + "\"";
-  titleDiv.innerText = "Live: " + scene.title;
-  tickerNews.innerText = "LIVE: " + scene.title;
-  audioCredit.href = scene.audioSource;
-  var audioTitle = scene.audioTitle;
-  if (!audioTitle) audioTitle = scene.title;
-  audioCredit.textContent = "\"" + audioTitle + "\"";
+  var addText = "";
+  if (category == "explore") addText = "Explore ";
+  titleText.innerText = addText + scene.title;
+  tickerNews.innerText = addText + scene.title;
+  if (scene.audioSource) {
+    audioCredit.href = scene.audioSource;
+    var audioTitle = scene.audioTitle;
+    if (!audioTitle) audioTitle = scene.title;
+    audioCredit.textContent = "\"" + audioTitle + "\"";
+  }
 
-  if (infoPopup.style.display == "none") showTitle();
+  //if (infoPopup.style.display == "none") showTitle();
+  if (infoPopup.style.opacity == 0) showTitle();
+
+  setTimeout(() => {
+    //if (infoPopup.style.display != "none") {
+    if (infoPopup.style.opacity != 0) {  
+      videoElement.pause();
+    }
+
+    if (!scene.audioLink)
+      aTimer = setTimeout(audioTimer, (audioElement.duration - 1) * 1000);
+
+    var startTime = Math.floor(Math.random() * (videoElement.duration - 20));
+    var newDuration = videoElement.duration - startTime;
+
+    if (startTime) videoElement.currentTime = startTime;
+
+    if (newDuration > 300)
+      vTimer = setTimeout(videoTimer, (newDuration - 1) * 1000);
+    else
+      vTimer = setTimeout(videoTimer, 300000);
+  }, 1000);
+  
 }
 
 function jumpBrightness(e) {
@@ -206,28 +291,21 @@ function stopPropagation(e) {
 }
 
 function toggleInfoPopup(e) {
-  if (infoPopup.style.display === "none") {
-    infoPopup.style.display = "block";
-  } else {
-    infoPopup.style.display = "none";
-  }
-  //pause();
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }        
-}
 
-function toggleMenuPopup(e) {
+  // if (infoPopup.style.display === "none") {
+  //   infoPopup.style.display = "block";
+  // } else {
+  //   infoPopup.style.display = "none";
+  // }
+
+  if (infoPopup.style.opacity == 0) {
+    infoPopup.style.opacity = .9;
+  } else {
+    infoPopup.style.opacity = 0;
+  }  
+
+  pause();
   
-  if (menuPopup.style.display === "none") {
-    infoPopup.style.display = "none";
-    menuPopup.style.display = "block";
-  } else {
-    infoPopup.style.display = "block";
-    menuPopup.style.display = "none";
-  }
-
   if (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -252,39 +330,30 @@ function toggleHelpPopup(e) {
 
 function setTheme(e) {
   console.log(e.target.value);
+  var newView = e.target.value;
 
-  if (e.target.value != "simple") {
-    var newUrl = window.location.origin + window.location.pathname + "?view=" + e.target.value + "&id=" + id;
-    if (category && category !== "all") newUrl += "&cat=" + category;
+  if (newView != view && newView != defaultView) {
+    var newUrl = window.location.origin + "/" + category + "?view=" + newView;
 
-    window.location.href = newUrl;         
-  }
-  else {
-    var newUrl = window.location.origin + window.location.pathname + "?id=" + id;
-    if (category && category !== "all") newUrl += "&cat=" + category;
-  
+    if (category != "explore") {
+      newUrl += "&id=" + id;
+    }
+
     window.location.href = newUrl;
   }
+  // if (e.target.value != defaultView) {
+  //   var newUrl = window.location.origin + window.location.pathname + "?view=" + e.target.value + "&id=" + id;
+  //   if (category && category !== "all") newUrl += "&cat=" + category;
+
+  //   window.location.href = newUrl;         
+  // }
+  // else {
+  //   var newUrl = window.location.origin + window.location.pathname + "?id=" + id;
+  //   if (category && category !== "all") newUrl += "&cat=" + category;
+  
+  //   window.location.href = newUrl;
+  // }
 }
-
-// function toggleNewsTheme(e) {
-//   if (view === "news") {
-//     newsCheckbox.checked = false;
-//     var newUrl = window.location.origin + window.location.pathname + "?id=" + id;
-
-//     if (category && category !== "all") newUrl += "&cat=" + category;
-  
-//     window.location.href = newUrl;    
-//   }
-//   else {
-//     newsCheckbox.checked = false;
-//     var newUrl = window.location.origin + window.location.pathname + "?view=news&id=" + id;
-  
-//     if (category && category !== "all") newUrl += "&cat=" + category;
-
-//     window.location.href = newUrl;     
-//   }
-// }
 
 function resizeVideo() {
   //if (window.innerHeight > window.innerWidth) {
@@ -299,7 +368,8 @@ function resizeVideo() {
 }
 
 function togglePause(e) {
-  if(infoPopup.style.display != "none") {
+  //if(infoPopup.style.display != "none") {
+  if(infoPopup.style.opacity != 0) {
     play(e);
   }
   else {
@@ -307,12 +377,18 @@ function togglePause(e) {
   }
 }
 
+var infoFade;
 function pause(e) {
-  //videoElement.pause();
+  videoElement.pause();
   //audioElement.pause();
+  clearTimeout(infoFade);
   fadeAudioOut();
   hideTitle();
+  //infoPopup.style.opacity = 0;
   infoPopup.style.display = "block";
+  setTimeout(() => {
+    infoPopup.style.opacity = 0.9;
+  }, 100);
 
   if (e) {
     e.preventDefault();
@@ -324,8 +400,12 @@ function play(e) {
   videoElement.play();
   //audioElement.play();
   fadeAudioIn();
-  infoPopup.style.display = "none";
-  menuPopup.style.display = "none";       
+  //infoPopup.style.display = "none";
+  infoPopup.style.opacity = 0;
+
+  infoFade = setTimeout(() => {
+    infoPopup.style.display = "none";
+  }, 1100);
 
   showTitle();
 
@@ -367,7 +447,7 @@ function randomVideo(e) {
   //play();
 
   var videoArray = [];
-  if (category) {
+  if (category && category != "all") {
     var catString = category[0].toUpperCase() + category.substr(1);
     videoArray = categories[catString];
   }
@@ -429,22 +509,33 @@ videoElement.onplay = function() {
     //document.getElementById("play-text").innerText = "Pause";
 };      
 
-function refreshVideo(newid) {   
+function refreshVideo(newId) {   
   var videoArray = [];
 
-  var newUrl = window.location.origin + window.location.pathname
-  var params = "";
+  var newUrl = window.location.origin;
   if (category && category.toLowerCase() != "all")
-    params = "cat=" + category;
-  
-  if (params)
-    params += "&id=" + newid;
-  else
-    params = "id=" + newid;
+    newUrl += "/" + category.toLowerCase();
 
-  if (view != "simple") params += "&view=" + view;
-  history.pushState({}, null, newUrl + "?" + params);
-  setVideo(newid);
+  if (category.toLowerCase() != "explore") {
+    newUrl += "?id=" + newId;
+    window.location.href = newUrl; 
+  }
+  else {
+    setVideo(newId);
+  }
+  // var newUrl = window.location.origin + window.location.pathname
+  // var params = "";
+  // if (category && category.toLowerCase() != "all")
+  //   params = "cat=" + category;
+  
+  // if (params)
+  //   params += "&id=" + newid;
+  // else
+  //   params = "id=" + newid;
+
+  // if (view != defaultView) params += "&view=" + view;
+  // history.pushState({}, null, newUrl + "?" + params);
+  // setVideo(newid);
   //window.location.href = newUrl + "?" + params;    
 }
 
@@ -459,45 +550,50 @@ function fadeAudioOut () {
       var newVolume = audioElement.volume - 0.1;
       if (newVolume < 0) newVolume = 0;
       audioElement.volume = newVolume;
+      asmrAudioElement.volume = newVolume;
     }
     // When volume at zero stop all the intervalling
     if (audioElement.volume === 0.0) {
         if (fadeAudio) clearInterval(fadeAudio);
+        audioElement.pause();
+        asmrAudioElement.pause();
     }
   }, 200);
 }  
 
 function fadeAudioIn () {
 
-  if (fadeAudio) clearInterval(fadeAudio);
-  audioElement.play();
+    if (fadeAudio) clearInterval(fadeAudio);
+    if (!audioMute) audioElement.play();
+    if (!asmrMute) asmrAudioElement.play();
 
-  fadeAudio = setInterval(function () {
-    // Only fade if past the fade out point or not at zero already
-    if (audioElement.volume != 1.0) {
-      var newVolume = audioElement.volume + 0.1;
-      if (newVolume > 1) newVolume = 1;
-      audioElement.volume = newVolume;
-    }
-    // When volume at zero stop all the intervalling
-    if (audioElement.volume === 1.0) {
-      if (fadeAudio) clearInterval(fadeAudio);
-    }
-  }, 200);
+    fadeAudio = setInterval(function () {
+      // Only fade if past the fade out point or not at zero already
+      if (audioElement.volume != 1.0) {
+        var newVolume = audioElement.volume + 0.1;
+        if (newVolume > 1) newVolume = 1;
+        audioElement.volume = newVolume;
+        asmrAudioElement.volume = newVolume;
+      }
+      // When volume at zero stop all the intervalling
+      if (audioElement.volume === 1.0) {
+        if (fadeAudio) clearInterval(fadeAudio);
+      }
+    }, 200);
 }
 
 var titleFade;
 
 function showTitle() {
-  if (view == "none") {
+  if (view == "none" || view == "simple") {
     hideTitle();
 
     titleFade = setTimeout(() => {
-      titleDiv.style.display = "block";
+      titleDiv.style.opacity = .7;
   
       titleFade = setTimeout(() => {
-        titleDiv.style.display = "none";
-      }, 4000);
+        if (view == "none") titleDiv.style.opacity = 0;
+      }, 8000);
     }, 1000);
   }
   else {
@@ -506,8 +602,38 @@ function showTitle() {
 }
 
 function hideTitle() {
-  if (view == "none") {
-    titleDiv.style.display = "none";
+  if (view == "none" || view == "simple") {
+    titleDiv.style.opacity = 0;
     if (titleFade) clearInterval(titleFade);
   }
+}
+
+function toggleMute(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  audioMute = !audioMute;
+  localStorage.setItem("audioMute", audioMute);
+
+  if (audioMute)
+    muteCheckbox.setAttribute("checked", "");
+  else
+    muteCheckbox.removeAttribute("checked");
+}
+
+function toggleAsmrMute(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+    
+  asmrMute = !asmrMute;
+  localStorage.setItem("asmrMute", asmrMute);
+
+  if (asmrMute)
+    asmrMuteCheckbox.setAttribute("checked", "");
+  else
+    asmrMuteCheckbox.removeAttribute("checked");
 }

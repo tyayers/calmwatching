@@ -19,6 +19,10 @@
       <source src="" type="audio/mp3">
     </audio>
 
+    <audio id="asmrAudioElement" autoplay loop>
+      <source src="media/asmr-whisper.mp3" type="audio/mp3">
+    </audio>
+
     <div id="ticker-div" style="display: none;" class="ticker">
       <div class="ticker-logo">
         <div class="ticker-logo-channel">
@@ -87,7 +91,10 @@
     </div>
 
     <div id="title-div">
-      
+      <div id="logo-div" style="position: fixed; top: 10px; left: 5px;">
+        <img src="icons/leaf.png" id="logo-pic" width="24px" style="position: relative; top: 2px; left: 4px;"/><span id="logo-span" style="position: relative; top: -8px; font-size: 24px;">CalmWatching.com</span>
+      </div>
+      <div id="title-text"></div>
     </div>
 
     <div class="info-frame">
@@ -98,15 +105,9 @@
 
     </div>
 
-    <div id="menu-popup" style="display: none" onclick="toggleMenuPopup(event)">
-      <div id="categoryList" class="info-box">
- 
-      </div>
-    </div>
-
     <div id="help-popup" style="display: none" onclick="toggleHelpPopup(event)">
       <div id="categoryList" class="info-box">
-        <div>CalmWatching.com was created to provide relaxing, ad-free background content for second monitors, TVs or other screen. <br><br> The scene is automatically changed every 10 minutes, or on demand. </div>
+        <div>CalmWatching.com provides creative-commons, ad-free background content for second monitors, TVs or other screens. <br><br> The scene is automatically changed every 5 minutes, or on demand. </div>
         <h2>Touchscreen controls</h2>
         <b>Swipe left:</b> load a new scene<br>
         <b>Swipe right:</b> go back to previous scene<br>
@@ -124,7 +125,7 @@
       </div>
     </div>
 
-    <div id="info-popup" onclick="togglePause(event)" style="display: none">
+    <div id="info-popup" onclick="togglePause(event)">
       <div id="infoList" class="info-box" onclick="stopPropagation(event)">
         <div id="logo-div">
           <img src="icons/leaf.png" id="logo-pic" width="50px" /><span id="logo-span">CalmWatching</span>
@@ -137,20 +138,36 @@
         <br><br>
 
         <div class="credits-box">
-          Audio (Press "Play" to unmute)
+          Audio
         </div>        
         <a href="#" target="_blank" id="credits-audio" onclick="event.stopPropagation()">test</a>
         <br><br>
         <div>
-          <label for="theme-select" onclick="toggleNewsTheme(event)" >Theme</label>
+          <span onclick="toggleMute(event);">
+            <input type="checkbox" id="mute" name="mute">
+            <label for="mute">Mute Audio</label>
+          </span>
+
+          <span onclick="toggleAsmrMute(event);">
+            <input type="checkbox" id="asmrMute" name="asmrMute" checked>
+            <label for="asmrMute">Mute ASMR Whisper</label>     
+          </span>     
+        </div>        
+        <br>
+        <span>
+          <label for="theme-select" onclick="toggleNewsTheme(event)" >Overlay</label>
 
           <select name="theme" id="theme-select" onchange="setTheme(event);">
+            <option value="none">None</option>
             <option value="simple">Simple</option>
             <option value="news">News</option>
-            <option value="none">None</option>
           </select>          
-        </div>
-        <br>
+        </span>
+        <span style="margin-left: 5px;">
+          <label for="cat-select" onclick="">Category</label>
+          <select name="cat" id="cat-select" onchange="setCategory(event);"></select>          
+        </span>
+        <br><br>
         <!--b>Tip:</b> type "r" or swipe left to change scene -->
       </div>
       <div id="play-panel">
@@ -163,23 +180,18 @@
         <!--button class="video-button video-button-info" onclick="toggleInfoPopup(event)"></button-->
         <div class="button-div">
           <button class="video-button video-button-info" onclick="toggleHelpPopup(event)" ondblclick="event.stopPropagation()"></button>
-          <div class="button-text">Info</div>
+          <div class="button-text">More Info</div>
         </div>
         
-        <div class="button-div">
-          <button class="video-button video-button-random" onclick="randomVideo(event)"></button>
-          <div class="button-text">Next</div>
-        </div>
-  
         <div class="button-div">
           <button id="fullscreen-button" class="video-button video-button-fullscreen" onclick="fullscreen(event)"></button>
           <div id="fullscreen-text" class="button-text">Fullscreen</div>
         </div>
-  
+
         <div class="button-div">
-          <button id="info-button" class="video-button video-button-menu" onclick="toggleMenuPopup(event)"></button>
-          <div class="button-text">Categories</div>
-        </div>
+          <button class="video-button video-button-random" onclick="randomVideo(event)"></button>
+          <div class="button-text">Next</div>
+        </div>        
       </div>     
     </div>
 

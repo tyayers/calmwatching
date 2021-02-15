@@ -95,6 +95,7 @@ body {
   opacity: .8;
   overflow-y: auto;
   z-index: 100;
+  transition: opacity 1s; 
 }           
 
 .info-box {
@@ -129,7 +130,7 @@ and (min-width : 321px) {
   padding-bottom: 10px;
   font-size: 30px;
   text-align: left;
-  width: 200px;
+  width: 211px;
   margin: auto;
 }
 
@@ -253,15 +254,16 @@ a:active {
 }
 
 #title-div {
-  display: none;
+  
   width: 100%;
   margin-top: 60;
   text-align: center;
-  font-family: 'Quicksand', cursive;
-  font-size:  6vh;
+  font-family: 'Cookie', cursive;
+  font-size:  8vh;
   color: white;
   background-color: black;
-  opacity: .7;
+  opacity: 0;
+  transition: opacity 2s; 
 }
 
 .title-div-simple {
@@ -275,6 +277,6 @@ a:active {
   color: white;
   background-color: black;
   opacity: .7;
-  padding-left: 35px;
+  padding-left: 45px;
   /* font-style: italic; */
 }

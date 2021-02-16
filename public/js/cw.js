@@ -38,25 +38,24 @@ var categoryList = document.getElementById("cat-select");
 var buttonPanel = document.getElementById("button-panel");
 var themeSelect = document.getElementById("theme-select");
 var newsCheckbox = document.getElementById("news-checkbox");
-var muteCheckbox = document.getElementById("mute");
-var asmrMuteCheckbox = document.getElementById("asmrMute");
+var playAudioCheckbox = document.getElementById("playAudioCheckbox");
+var playASMRCheckbox = document.getElementById("playASMRCheckbox");
 
-var audioMute = localStorage.getItem('audioMute') == "true";
-if (audioMute)
-  muteCheckbox.setAttribute("checked", "");
-else
-  muteCheckbox.removeAttribute("checked");
+var playAudio = localStorage.getItem('playAudio');
+if (playAudio == undefined) localStorage.setItem('playAudio', "true");
+playAudio = localStorage.getItem('playAudio') == "true";
+playAudioCheckbox.checked = playAudio;
+// if (playAudio)
+//   playAudioCheckbox.setAttribute("checked", "");
+// else
+//   playAudioCheckbox.removeAttribute("checked");
 
-var asmrMute = localStorage.getItem('asmrMute');
-if (asmrMute == undefined || asmrMute == "true") 
-  asmrMute = true;
-else
-  asmrMute = false;
-
-if (asmrMute)
-  asmrMuteCheckbox.setAttribute("checked", "");
-else
-  asmrMuteCheckbox.removeAttribute("checked");
+var playASMR = localStorage.getItem('playASMR') == "true";
+playASMRCheckbox.checked = playASMR;
+// if (playASMR) 
+//   playASMRCheckbox.setAttribute("checked", "");
+// else
+//   playASMRCheckbox.removeAttribute("checked");
 
 if(view)
   themeSelect.value = view;
@@ -82,6 +81,10 @@ fetch('config.json')
 .then((res) => res.json())
 .then((res) => {
   config = res;
+
+  config.scenes.unshift({
+    category: "All"
+  })
   config.scenes.forEach(scene => {
 
     if (scene.category) {
@@ -123,19 +126,21 @@ fetch('config.json')
 
   if (id)
     setVideo(id);
+  else if (category == "all")
+    window.location.href = window.location.origin + "/explore";
   else
     randomVideo();
 
   toggleInfoPopup();
 
-  if(view == "news") {
-    tickerDiv.style.display = "block";
-  }
-  else if (view == "simple" || view == "none") {
-    //titleDiv.classList.remove("tit");
-    titleDiv.classList.add("title-div-simple");    
-    titleDiv.style.display = "block";
-  }
+  // if(view == "news") {
+  //   tickerDiv.style.display = "block";
+  // }
+  // else if (view == "simple" || view == "none") {
+  //   //titleDiv.classList.remove("tit");
+  //   titleDiv.classList.add("title-div-simple");    
+  //   titleDiv.style.display = "block";
+  // }
   
   setTimeout(resizeVideo, 1000);
   setTimeout(resizeVideo, 8000);
@@ -148,7 +153,7 @@ fetch('config.json')
 .catch((e) => console.log('Fetch Error:', e))      
 
 document.addEventListener('keydown', changeVideo);
-document.addEventListener('click', togglePause);
+//document.addEventListener('click', togglePause);
 document.addEventListener('dblclick', fullscreen);
 
 window.onresize = resizeVideo;
@@ -177,6 +182,7 @@ var videoTimer = function() {
 
 var audioTimer = function() {
   audioElement.src = "media/music/contemplation" + Math.floor(Math.random() * config.music.contemplation) + ".mp3";
+  audioElement.play();
 }
 
 function setCategory(e) {
@@ -188,13 +194,13 @@ function setCategory(e) {
   if (newCategory.toLowerCase() != "all") {
     //newUrl += "?cat=" + newCategory;
     newUrl += "/" + newCategory;
-    if (view != defaultView) newUrl += "&view=" + none;
+    //if (view != defaultView) newUrl += "&view=" + none;
   }
   // else if (view != defaultView)
   //   newUrl += "?view=" + view;
 
-  if (view != defaultView)
-    newUrl += "?view=" + view;
+  // if (view != defaultView)
+  //   newUrl += "?view=" + view;
 
   window.location.href = newUrl;
   //randomVideo();
@@ -328,18 +334,31 @@ function toggleHelpPopup(e) {
   }        
 }
 
-function setTheme(e) {
-  console.log(e.target.value);
-  var newView = e.target.value;
+function setTheme(newView) {
+  // console.log(e.target.value);
+  // var newView = e.target.value;
 
-  if (newView != view && newView != defaultView) {
-    var newUrl = window.location.origin + "/" + category + "?view=" + newView;
+  if (newView != view) {
+    view = newView;
+    localStorage.setItem('view', newView);
 
-    if (category != "explore") {
-      newUrl += "&id=" + id;
+    if(view == "news") {
+      tickerDiv.style.display = "block";
+      titleDiv.style.display =  "none";
     }
+    else if (view == "simple" || view == "none") {
+      //titleDiv.classList.remove("tit");
+      tickerDiv.style.display = "none";
+      titleDiv.classList.add("title-div-simple");    
+      titleDiv.style.display = "block";
+    }    
+    // var newUrl = window.location.origin + "/" + category + "?view=" + newView;
 
-    window.location.href = newUrl;
+    // if (category != "explore") {
+    //   newUrl += "&id=" + id;
+    // }
+
+    // window.location.href = newUrl;
   }
   // if (e.target.value != defaultView) {
   //   var newUrl = window.location.origin + window.location.pathname + "?view=" + e.target.value + "&id=" + id;
@@ -383,7 +402,7 @@ function pause(e) {
   //audioElement.pause();
   clearTimeout(infoFade);
   fadeAudioOut();
-  hideTitle();
+  //hideTitle();
   //infoPopup.style.opacity = 0;
   infoPopup.style.display = "block";
   setTimeout(() => {
@@ -564,8 +583,15 @@ function fadeAudioOut () {
 function fadeAudioIn () {
 
     if (fadeAudio) clearInterval(fadeAudio);
-    if (!audioMute) audioElement.play();
-    if (!asmrMute) asmrAudioElement.play();
+    if (playAudio) 
+      audioElement.play();
+    else
+      audioElement.pause();
+
+    if (playASMR) 
+      asmrAudioElement.play();
+    else
+      asmrAudioElement.pause();
 
     fadeAudio = setInterval(function () {
       // Only fade if past the fade out point or not at zero already
@@ -586,7 +612,7 @@ var titleFade;
 
 function showTitle() {
   if (view == "none" || view == "simple") {
-    hideTitle();
+    //hideTitle();
 
     titleFade = setTimeout(() => {
       titleDiv.style.opacity = .7;
@@ -609,31 +635,23 @@ function hideTitle() {
 }
 
 function toggleMute(e) {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
 
-  audioMute = !audioMute;
-  localStorage.setItem("audioMute", audioMute);
+  playAudio = !playAudio;
+  localStorage.setItem("playAudio", playAudio);
 
-  if (audioMute)
-    muteCheckbox.setAttribute("checked", "");
-  else
-    muteCheckbox.removeAttribute("checked");
+  // if (playAudio)
+  //   playAudioCheckbox.setAttribute("checked", "");
+  // else
+  //   playAudioCheckbox.removeAttribute("checked");
 }
 
-function toggleAsmrMute(e) {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
+function toggleplayASMR(e) {
     
-  asmrMute = !asmrMute;
-  localStorage.setItem("asmrMute", asmrMute);
+  playASMR = !playASMR;
+  localStorage.setItem("playASMR", playASMR);
 
-  if (asmrMute)
-    asmrMuteCheckbox.setAttribute("checked", "");
-  else
-    asmrMuteCheckbox.removeAttribute("checked");
+  // if (playASMR)
+  //   playASMRCheckbox.setAttribute("checked", "");
+  // else
+  //   playASMRCheckbox.removeAttribute("checked");
 }

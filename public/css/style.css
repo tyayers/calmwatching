@@ -48,7 +48,6 @@ body {
   opacity: 0;
   left: 0px; 
   top: 0px;   
-  pointer-events: none;     
 }
 
 .info-frame {
@@ -254,29 +253,27 @@ a:active {
 }
 
 #title-div {
-  
   width: 100%;
   margin-top: 60;
-  text-align: center;
+  text-align: right;
   font-family: 'Cookie', cursive;
   font-size:  8vh;
   color: white;
   background-color: black;
   opacity: 0;
-  transition: opacity 2s; 
+  transition: opacity 2s;
+  padding-right: 20px;
 }
 
 .title-div-simple {
-  display: none;
+  display: block;
   width: 100%;
   position: absolute;
   bottom: 20px;
-  text-align: left !important; 
   font-family: 'Quicksand', cursive;
   font-size:  6vw;
   color: white;
   background-color: black;
-  opacity: .7;
-  padding-left: 45px;
+  c
   /* font-style: italic; */
 }

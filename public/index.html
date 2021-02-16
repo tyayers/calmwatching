@@ -10,6 +10,7 @@
 
   </head>
   <body style="background-color: black">
+
     <video id="videoElement" autoplay loop muted class="video">
       <source src="" type="video/mp4">
       Your browser does not support the video tag.
@@ -20,7 +21,7 @@
     </audio>
 
     <audio id="asmrAudioElement" autoplay loop>
-      <source src="media/asmr-whisper.mp3" type="audio/mp3">
+      <source src="https://storage.googleapis.com/calmw/media/asmr-whisper.mp3" type="audio/mp3">
     </audio>
 
     <div id="ticker-div" style="display: none;" class="ticker">
@@ -90,18 +91,19 @@
       </div>
     </div>
 
-    <div id="title-div">
-      <div id="logo-div" style="position: fixed; top: 10px; left: 5px;">
-        <img src="icons/leaf.png" id="logo-pic" width="24px" style="position: relative; top: 2px; left: 4px;"/><span id="logo-span" style="position: relative; top: -8px; font-size: 24px;">CalmWatching.com</span>
-      </div>
-      <div id="title-text"></div>
+    <div id="logo-div" style="position: fixed; top: 10px; left: 5px; color: white; opacity: .7;">
+      <img src="icons/leaf.png" id="logo-pic" width="24px" style="position: relative; top: 2px; left: 4px;"/><span id="logo-span" style="position: relative; top: -8px; font-size: 24px;">CalmWatching.com</span>
+    </div>
+
+    <div id="title-div" class="title-div-simple">
+      <div id="title-text" style="padding-right: 20px;"></div>
     </div>
 
     <div class="info-frame">
  
     </div>
 
-    <div id="bright-frame">
+    <div id="bright-frame" onclick="togglePause(event)">
 
     </div>
 
@@ -123,10 +125,10 @@
         <div id="credits-icon">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         <div id="credits-icon"><a href="https://codepen.io/XombeFlambe/pen/ZYgMEP">News Picker CodPen by Nate Levine</a></div>
       </div>
-    </div>
+    </div>    
 
-    <div id="info-popup" onclick="togglePause(event)">
-      <div id="infoList" class="info-box" onclick="stopPropagation(event)">
+    <div id="info-popup">
+      <div id="infoList" class="info-box">
         <div id="logo-div">
           <img src="icons/leaf.png" id="logo-pic" width="50px" /><span id="logo-span">CalmWatching</span>
         </div>
@@ -143,21 +145,21 @@
         <a href="#" target="_blank" id="credits-audio" onclick="event.stopPropagation()">test</a>
         <br><br>
         <div>
-          <span onclick="toggleMute(event);">
-            <input type="checkbox" id="mute" name="mute">
-            <label for="mute">Mute Audio</label>
+          <span>
+            <input type="checkbox" id="playAudioCheckbox" name="playAudioCheckbox"  onclick="toggleMute(event)">
+            <label for="playAudioCheckbox">Audio</label>
           </span>
 
-          <span onclick="toggleAsmrMute(event);">
-            <input type="checkbox" id="asmrMute" name="asmrMute" checked>
-            <label for="asmrMute">Mute ASMR Whisper</label>     
+          <span>
+            <input type="checkbox" id="playASMRCheckbox" name="playASMRCheckbox"  onclick="toggleplayASMR(event)">
+            <label for="playASMRCheckbox">ASMR Whisper</label>     
           </span>     
         </div>        
         <br>
         <span>
           <label for="theme-select" onclick="toggleNewsTheme(event)" >Overlay</label>
 
-          <select name="theme" id="theme-select" onchange="setTheme(event);">
+          <select name="theme" id="theme-select" onchange="setTheme(event.target.value);">
             <option value="none">None</option>
             <option value="simple">Simple</option>
             <option value="news">News</option>

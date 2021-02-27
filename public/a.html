@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>CalmWatching.com</title>
+    <link rel="icon" type="image/png" href="icons/leaf.png"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Homemade+Apple&family=Noto+Sans&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+    <script src="js/swiped-events.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/ticker.css" />
+
+  </head>
+  <body style="background-color: black">
+
+    <video id="videoElement" autoplay loop muted class="video" src="https://storage.googleapis.com/calmw/media/campfire.mp4">
+    </video>
+    
+    <audio id="audioElement" autoplay loop>
+      <source src="" type="audio/mp3">
+    </audio>
+
+    <div id="corner-logo-div">
+      <img src="icons/leaf.png" id="logo-pic" width="24px" style="position: relative; top: 2px; left: 4px;"/><span id="logo-span" style="position: relative; top: -8px; font-size: 24px;">CalmWatching.com</span>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyA7zhbDYMQm7ca0wSri0ysvOM8qz4YYIh8",
+        authDomain: "calmwatching.firebaseapp.com",
+        databaseURL: "https://calmwatching.firebaseio.com",
+        projectId: "calmwatching",
+        storageBucket: "calmwatching.appspot.com",
+        messagingSenderId: "903665042117",
+        appId: "1:903665042117:web:b194bcf670e4dd329ae6ac",
+        measurementId: "G-NL59L2PGZ0"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    
+    <!-- <script>
+      setTimeout(()=> {
+        var videoElement = document.getElementById("videoElement");
+        
+        videoElement.pause();
+
+        videoElement.src = "https://storage.googleapis.com/calmw/media/nature2.mp4";
+        videoElement.load();
+        videoElement.play();
+      }, 5000);
+    </script> -->
+
+    <script src="js/cw_mini.js"></script>
+  </body>
+</html>

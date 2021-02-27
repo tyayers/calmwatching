@@ -1,7 +1,7 @@
 {
   "baseUrl": "https://storage.googleapis.com/calmw/",
   "music": {
-    "contemplation": 23,
+    "contemplation": 22,
     "happy": 11
   },
   "scenes": [
@@ -268,7 +268,7 @@
     {
       "id": "XXNetQ7I",
       "title": "Black Cat In The Grass",
-      "category": "Animals",
+      "category": "Animals, Explore",
       "videoSource": "https://www.videezy.com/animals-and-wildlife/2165-black-cat-in-the-grass-stock-video",
       "videoLink": "media/black_cat.mp4",
       "audioSource": "https://freesound.org/people/kvgarlic/sounds/135472/",
@@ -451,6 +451,76 @@
       "category": "Explore, Nature",
       "videoSource": "https://www.youtube.com/watch?v=-c552FHJbrM",
       "videoLink": "media/drone5.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "ITbk6Fz4",
+      "title": "Nature",
+      "category": "Explore, Nature",
+      "videoSource": "https://www.youtube.com/watch?v=qTcskA1R1KA",
+      "videoLink": "media/nature1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "p1MxhIQU",
+      "title": "Nature",
+      "category": "Explore, Nature, Animals",
+      "videoSource": "https://www.youtube.com/watch?v=muczNvx9fgg",
+      "videoLink": "media/nature2.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "fmX7zLBP",
+      "title": "Paint",
+      "category": "Explore, Home",
+      "videoSource": "https://www.pexels.com/video/a-mixture-of-different-colored-liquid-paints-3078336/",
+      "videoLink": "media/paint1.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "fmX7zLB3",
+      "title": "Paint",
+      "category": "Explore, Home",
+      "videoSource": "https://www.pexels.com/video/painting-a-wood-853877/",
+      "videoLink": "media/paint2.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "fmX4zLB3",
+      "title": "Paint",
+      "category": "Explore, Home",
+      "videoSource": "https://www.pexels.com/video/dropping-a-blue-liquid-on-a-clear-water-to-create-an-abstract-images-3024112/",
+      "videoLink": "media/paint3.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "3gX4zLB3",
+      "title": "Paint",
+      "category": "Explore, Home",
+      "videoSource": "https://www.pexels.com/video/abstract-art-paintings-on-sketchbook-3814951/",
+      "videoLink": "media/paint4.mp4",
+      "audioSource": "",
+      "audioTitle": "",
+      "audioLink": ""
+    },
+    {
+      "id": "3g6fzLB3",
+      "title": "Paint",
+      "category": "Explore, Home",
+      "videoSource": "https://www.pexels.com/video/a-mural-painting-done-on-a-brick-wall-3999358/",
+      "videoLink": "media/city2.mp4",
       "audioSource": "",
       "audioTitle": "",
       "audioLink": ""

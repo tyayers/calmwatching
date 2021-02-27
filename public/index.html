@@ -11,8 +11,7 @@
   </head>
   <body style="background-color: black">
 
-    <video id="videoElement" autoplay loop muted class="video">
-      <source src="" type="video/mp4">
+    <video id="videoElement" autoplay loop muted class="video" src="https://storage.googleapis.com/calmw/media/fireplace.mp4">
       Your browser does not support the video tag.
     </video>
     
@@ -91,21 +90,21 @@
       </div>
     </div>
 
-    <div id="logo-div" style="position: fixed; top: 10px; left: 5px; color: white; opacity: .7;">
+    <div id="corner-logo-div" style="">
       <img src="icons/leaf.png" id="logo-pic" width="24px" style="position: relative; top: 2px; left: 4px;"/><span id="logo-span" style="position: relative; top: -8px; font-size: 24px;">CalmWatching.com</span>
     </div>
 
-    <div id="title-div" class="title-div-simple">
-      <div id="title-text" style="padding-right: 20px;"></div>
+    <div id="title-div" style="display: none;">
+      <span id="title-text"></span>
     </div>
 
     <div class="info-frame">
  
     </div>
 
-    <div id="bright-frame" onclick="togglePause(event)">
+    <!--div id="bright-frame" onclick="togglePause(event)">
 
-    </div>
+    </div-->
 
     <div id="help-popup" style="display: none" onclick="toggleHelpPopup(event)">
       <div id="categoryList" class="info-box">
@@ -127,16 +126,35 @@
       </div>
     </div>    
 
-    <div id="info-popup">
+    <div id="info-popup" style="display:none; opacity: 0;">
       <div id="infoList" class="info-box">
         <div id="logo-div">
           <img src="icons/leaf.png" id="logo-pic" width="50px" /><span id="logo-span">CalmWatching</span>
         </div>
         
         <div class="credits-box">
-          Scene
+          Video
         </div>
         <a href="#" target="_blank" id="credits-video" onclick="event.stopPropagation()">test</a>
+        <br><br>
+        <span>
+          <input type="checkbox" id="bwCheckbox" name="bwCheckbox"  onclick="toggleBw(event)">
+          <label for="bwCheckbox">Black & White</label>     
+        </span> 
+        <br><br>
+        <span>
+          <label for="theme-select" onclick="toggleNewsTheme(event)" >Text</label>
+
+          <select name="theme" id="theme-select" onchange="setTheme(event.target.value);">
+            <option value="none">None</option>
+            <option value="simple">Simple</option>
+            <option value="news">News</option>
+          </select>          
+        </span>
+        <span style="margin-left: 5px;">
+          <label for="cat-select" onclick="">Category</label>
+          <select name="cat" id="cat-select" onchange="setCategory(event);"></select>          
+        </span>
         <br><br>
 
         <div class="credits-box">
@@ -153,22 +171,8 @@
           <span>
             <input type="checkbox" id="playASMRCheckbox" name="playASMRCheckbox"  onclick="toggleplayASMR(event)">
             <label for="playASMRCheckbox">ASMR Whisper</label>     
-          </span>     
+          </span>  
         </div>        
-        <br>
-        <span>
-          <label for="theme-select" onclick="toggleNewsTheme(event)" >Overlay</label>
-
-          <select name="theme" id="theme-select" onchange="setTheme(event.target.value);">
-            <option value="none">None</option>
-            <option value="simple">Simple</option>
-            <option value="news">News</option>
-          </select>          
-        </span>
-        <span style="margin-left: 5px;">
-          <label for="cat-select" onclick="">Category</label>
-          <select name="cat" id="cat-select" onchange="setCategory(event);"></select>          
-        </span>
         <br><br>
         <!--b>Tip:</b> type "r" or swipe left to change scene -->
       </div>

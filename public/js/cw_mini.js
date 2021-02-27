@@ -13,7 +13,6 @@ var view = localStorage.getItem('view');
 
 var vTimer;
 var aTimer;
-
 if (window.location.pathname != "/")
   category = window.location.pathname.replace("/", "");
 
@@ -46,26 +45,17 @@ var bwCheckbox = document.getElementById("bwCheckbox");
 var playAudio = localStorage.getItem('playAudio');
 if (playAudio == undefined) localStorage.setItem('playAudio', "true");
 playAudio = localStorage.getItem('playAudio') == "true";
-playAudioCheckbox.checked = playAudio;
 
 var playASMR = localStorage.getItem('playASMR') == "true";
-playASMRCheckbox.checked = playASMR;
 
 var bwFilter = localStorage.getItem('bwFilter');
 if (bwFilter == undefined) localStorage.setItem('bwFilter', "true");
 bwFilter = localStorage.getItem('bwFilter') == "true";
-bwCheckbox.checked = bwFilter;
 if (bwFilter) videoElement.classList.toggle("blackandwhite");;
 
-if(view)
-  themeSelect.value = view;
-else {
-  view = defaultView;
-  themeSelect.value = defaultView;
-}
+view = defaultView;
 
 audioElement.volume = 0;
-asmrAudioElement.volume = 0;
 
 fetch('config.json')
 .then((res) => {
@@ -80,23 +70,17 @@ fetch('config.json')
 
   config.scenes.unshift({
     category: "All"
-  })
-  config.scenes.forEach(scene => {
+  });
 
+  for (i=0; i<config.scenes.length; i++) {
+    var scene = config.scenes[i];
     if (scene.category) {
       var cats = scene.category.split(",");
 
-      for (i in cats) {
-        cat = cats[i].trim();
+      for (p in cats) {
+        cat = cats[p].trim();
         if (!categories[cat]) {
           categories[cat] = [];
-          var entryElement = document.createElement("option");
-          entryElement.setAttribute("value", cat.toLowerCase());
-          entryElement.innerHTML = cat;
-
-          if (cat.toLowerCase() == category) entryElement.setAttribute("selected", "");
-
-          categoryList.appendChild(entryElement);
         }
 
         var newScene = Object.assign({}, scene);
@@ -104,15 +88,20 @@ fetch('config.json')
         configById[scene.id] = newScene;
         categories[cat].push(scene);
       }
-    }
-  });
-
-  if (id)
-    setVideo(id);
-  else if (category == "all")
-    window.location.href = window.location.origin + "/explore";
-  else
+    }    
+  }
+  setTimeout(()=> {
     randomVideo();
+  }, 5000);
+  
+  // setTimeout(() => {
+  //   if (id)
+  //     setVideo(id);
+  //   else if (category == "all")
+  //     window.location.href = window.location.origin + "/explore";
+  //   else
+  //     randomVideo();
+  // }, 5000);
 
   //toggleInfoPopup();
 })      
@@ -120,7 +109,7 @@ fetch('config.json')
 
 document.addEventListener('keydown', changeVideo);
 //document.addEventListener('click', togglePause);
-document.addEventListener('dblclick', togglePause);
+document.addEventListener('dblclick', fullscreen);
 
 window.onresize = resizeVideo;
 
@@ -131,16 +120,6 @@ document.addEventListener('swiped-right', function(e) {
 document.addEventListener('swiped-left', function(e) {
   randomVideo();
 });      
-
-window.onpopstate = function (event) {
-  console.log("hello");
-  const queryString = window.location.search;
-  console.log(queryString);
-  const urlParams = new URLSearchParams(queryString);
-  var newCategory = urlParams.get("cat");
-  var newId = urlParams.get("id");        
-  setVideo(newId);
-}
 
 var videoTimer = function() {
   randomVideo();
@@ -195,8 +174,6 @@ function setVideo(newid) {
   if (!audioLink) {
     //Load default music
     audioLink = "media/music/contemplation" + Math.floor(Math.random() * config.music.contemplation) + ".mp3";
-    audioCredit.href = "https://www.bensound.com";
-    audioCredit.textContent = "\"Royalty Free Music by BenSound\"";    
   }
 
   if (config.baseUrl && window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1") {
@@ -208,51 +185,30 @@ function setVideo(newid) {
   videoElement.remove();
 
   videoElement = document.createElement('video');
-  videoElement.classList.add("video");
-  if (bwFilter) videoElement.classList.toggle("blackandwhite");
+
   videoElement.src = videoLink;
   videoElement.autoplay = true;
-  videoElement.muted = true;
-  videoElement.loop = true;
   videoElement.style.width = "100%";
-  videoElement.style.height = "100%";
-  videoElement.poster = 'data:image/jpeg;base64,000'
-
+  videoElement.style.height = "auto";
+  videoElement.load();
   document.body.appendChild(videoElement);
-  audioElement.src = audioLink;
-  //play();
-  fadeAudioIn();
-  cornerLogoDiv.style.top = 10;
-  //if (infoPopup.style.display != "none") {
-  if (infoPopup.style.opacity != 0) {  
-    fadeAudioOut();
-    //audioElement.pause();
-  }
 
-  videoCredit.href = scene.videoSource;
-  videoCredit.textContent = "\"" + scene.title + "\"";
+  audioElement.src = audioLink;
+
+  //play();
+  //if (infoPopup.style.display != "none") {
+  
+
   var addText = "";
   //if (category == "explore") addText = "Explore ";
-  titleText.innerText = addText + scene.title;
-  tickerNews.innerText = addText + scene.title;
   if (scene.audioSource) {
-    audioCredit.href = scene.audioSource;
-    var audioTitle = scene.audioTitle;
-    if (!audioTitle) audioTitle = scene.title;
-    audioCredit.textContent = "\"" + audioTitle + "\"";
+    //audioCredit.href = scene.audioSource;
   }
 
   //if (infoPopup.style.display == "none") showTitle();
-  if (infoPopup.style.opacity == 0) showTitle();
 
   setTimeout(() => {
     //if (infoPopup.style.display != "none") {
-    if (infoPopup.style.opacity != 0) {  
-      videoElement.pause();
-    }
- 
-    //videoElement.load();
-    //videoElement.play();
 
     if (!scene.audioLink)
       aTimer = setTimeout(audioTimer, (audioElement.duration - 1) * 1000);
@@ -292,44 +248,6 @@ function stopPropagation(e) {
   }          
 }
 
-function toggleInfoPopup(e) {
-
-  if (infoPopup.style.display === "none") {
-    infoPopup.style.display = "block";
-  } else {
-    infoPopup.style.display = "none";
-  }
-
-  // if (infoPopup.style.opacity == 0) {
-  //   infoPopup.style.opacity = .9;
-  // } else {
-  //   infoPopup.style.opacity = 0;
-  // }  
-
-  pause();
-  
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }        
-}
-
-function toggleHelpPopup(e) {
-  
-  if (helpPopup.style.display === "none") {
-    infoPopup.style.display = "none";
-    helpPopup.style.display = "block";
-  } else {
-    infoPopup.style.display = "block";
-    helpPopup.style.display = "none";
-  }
-
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }        
-}
-
 function setTheme(newView) {
   // console.log(e.target.value);
   // var newView = e.target.value;
@@ -347,65 +265,29 @@ function setTheme(newView) {
       tickerDiv.style.display = "none";
       titleDiv.style.display = "block";
     }    
-    // var newUrl = window.location.origin + "/" + category + "?view=" + newView;
-
-    // if (category != "explore") {
-    //   newUrl += "&id=" + id;
-    // }
-
-    // window.location.href = newUrl;
   }
-  // if (e.target.value != defaultView) {
-  //   var newUrl = window.location.origin + window.location.pathname + "?view=" + e.target.value + "&id=" + id;
-  //   if (category && category !== "all") newUrl += "&cat=" + category;
-
-  //   window.location.href = newUrl;         
-  // }
-  // else {
-  //   var newUrl = window.location.origin + window.location.pathname + "?id=" + id;
-  //   if (category && category !== "all") newUrl += "&cat=" + category;
-  
-  //   window.location.href = newUrl;
-  // }
 }
 
 function resizeVideo() {
   if (window.innerHeight > window.innerWidth) {
     videoElement.style.height = "100%";
     videoElement.style.width = "auto";
-    videoElement.style.left = (window.innerWidth / 2) * -1;
-    
+    videoElement.style.top = 0;
+    cornerLogoDiv.style.top = 10;
+
+    //titleDiv.style.top = window.innerHeight - titleText.offsetHeight - 10;
     //videoElement.style.left = -1 * (videoElement.offsetWidth / 2 - (window.innerWidth / 2));
   }
   else {
-    videoElement.style.height = "100%";
+    videoElement.style.height = "auto";
     videoElement.style.width = "100%";
-    videoElement.style.left = 0;
+    var newTop =  -1 * (videoElement.offsetHeight / 2 - (window.innerHeight / 2));
+    if (newTop < 0) newTop = 0;
+
+    videoElement.style.top = newTop;
+    cornerLogoDiv.style.top = newTop + 10;
+    //titleDiv.style.top = (newTop + videoElement.offsetHeight) - titleText.offsetHeight - 10;
   }
-
-  // if (window.innerHeight > window.innerWidth) {
-  //   videoElement.style.height = "100%";
-  //   videoElement.style.width = "auto";
-  //   videoElement.style.top = 0;
-  //   cornerLogoDiv.style.top = 10;
-
-  //   titleDiv.style.top = window.innerHeight - titleText.offsetHeight - 10;
-  //   //videoElement.style.left = -1 * (videoElement.offsetWidth / 2 - (window.innerWidth / 2));
-  // }
-  // else {
-  //   videoElement.style.height = "auto";
-  //   videoElement.style.width = "100%";
-  //   var newTop =  -1 * (videoElement.offsetHeight / 2 - (window.innerHeight / 2));
-  //   if (newTop < 0) newTop = 0;
-
-  //   videoElement.style.top = newTop;
-  //   cornerLogoDiv.style.top = newTop + 10;
-  //   titleDiv.style.top = (newTop + videoElement.offsetHeight) - titleText.offsetHeight - 10;
-  // }
-    // if (infoPopup.style.display === "none" && menuPopup.style.display === "none") {
-    //   audioElement.pause();
-    //   audioElement.play();
-    // }
 }
 
 function togglePause(e) {
@@ -442,13 +324,6 @@ function play(e) {
   //audioElement.play();
   fadeAudioIn();
   //infoPopup.style.display = "none";
-  infoPopup.style.opacity = 0;
-
-  infoFade = setTimeout(() => {
-    infoPopup.style.display = "none";
-  }, 1100);
-
-  showTitle();
 
   if (e) {
     e.preventDefault();
@@ -488,7 +363,7 @@ function randomVideo(e) {
   //play();
 
   var videoArray = [];
-  if (category && category != "all") {
+  if (category && category != "all" && !category.endsWith(".html")) {
     var catString = category[0].toUpperCase() + category.substr(1);
     videoArray = categories[catString];
   }
@@ -504,7 +379,7 @@ function randomVideo(e) {
 }
 
 function changeVideo(e) {
-  console.log(e.code); 
+  //alert(e.code);
   if (e.code === "ArrowRight") {
     //window.history.forward();
     //var oldId = id;
@@ -534,13 +409,13 @@ function changeVideo(e) {
   }
   else if (e.code === "ArrowDown") {
     //if (audioElement.volume >= 0.1) audioElement.volume -= 0.1;
-  }      
+  }          
   else if (e.code === "KeyM") {
     toggleMute();
   }  
   else if (e.code === "KeyB") {
     toggleBw();
-  }           
+  }      
 }
 
 videoElement.onpause = function() {
@@ -560,18 +435,9 @@ videoElement.onplay = function() {
 function refreshVideo(newId) {   
   var videoArray = [];
 
-  var newUrl = window.location.origin;
-  if (category && category.toLowerCase() != "all")
-    newUrl += "/" + category.toLowerCase();
+  setVideo(newId);
 
-  if (category.toLowerCase() != "explore") {
-    newUrl += "?id=" + newId;
-    window.location.href = newUrl; 
-  }
-  else {
-    setVideo(newId);
-  }
-  // var newUrl = window.location.origin + window.location.pathname
+    // var newUrl = window.location.origin + window.location.pathname
   // var params = "";
   // if (category && category.toLowerCase() != "all")
   //   params = "cat=" + category;
@@ -598,13 +464,11 @@ function fadeAudioOut () {
       var newVolume = audioElement.volume - 0.1;
       if (newVolume < 0) newVolume = 0;
       audioElement.volume = newVolume;
-      asmrAudioElement.volume = newVolume;
     }
     // When volume at zero stop all the intervalling
     if (audioElement.volume === 0.0) {
         if (fadeAudio) clearInterval(fadeAudio);
         audioElement.pause();
-        asmrAudioElement.pause();
     }
   }, 200);
 }  
@@ -617,18 +481,12 @@ function fadeAudioIn () {
     else
       audioElement.pause();
 
-    if (playASMR) 
-      asmrAudioElement.play();
-    else
-      asmrAudioElement.pause();
-
     fadeAudio = setInterval(function () {
       // Only fade if past the fade out point or not at zero already
       if (audioElement.volume != 1.0) {
         var newVolume = audioElement.volume + 0.1;
         if (newVolume > 1) newVolume = 1;
         audioElement.volume = newVolume;
-        asmrAudioElement.volume = newVolume;
       }
       // When volume at zero stop all the intervalling
       if (audioElement.volume === 1.0) {
@@ -668,16 +526,11 @@ function toggleMute(e) {
   playAudio = !playAudio;
   localStorage.setItem("playAudio", playAudio);
 
-  if (playAudio) {
-    fadeAudioIn();
-    if (e == undefined)
-      playAudioCheckbox.checked = true;
-  }
-  else {
+  if (!playAudio)
     fadeAudioOut();
-    if (e == undefined)
-    playAudioCheckbox.checked = false;
-  }
+  else
+    fadeAudioIn();
+
   // if (playAudio)
   //   playAudioCheckbox.setAttribute("checked", "");
   // else
